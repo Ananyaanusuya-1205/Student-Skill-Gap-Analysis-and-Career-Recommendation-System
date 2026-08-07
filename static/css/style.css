@@ -1,0 +1,537 @@
+/* =========================================================
+   Skill Compass — design tokens
+   ========================================================= */
+:root {
+  --navy:        #16233F;
+  --navy-2:      #202F55;
+  --navy-soft:   #2C3D67;
+  --paper:       #F6F3EC;
+  --paper-dim:   #ECE7DA;
+  --ink:         #1E1B16;
+  --ink-soft:    #5B5648;
+  --gold:        #C89B3C;
+  --gold-soft:   #E4C57E;
+  --teal:        #2E7D6B;
+  --teal-soft:   #DCEAE6;
+  --rust:        #C1502E;
+  --rust-soft:   #F3DCD2;
+  --line:        rgba(22, 35, 63, 0.14);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  --radius: 10px;
+  --wrap: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+a { color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--navy);
+  margin: 0 0 0.4em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(246, 243, 236, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.01em;
+}
+.wordmark-mark { color: var(--gold); font-size: 1.1rem; }
+
+.site-nav { display: flex; gap: 28px; }
+.site-nav a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--navy-soft);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 3px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.site-nav a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease, box-shadow .2s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--navy);
+  color: var(--paper);
+  box-shadow: 0 4px 0 var(--gold);
+}
+.btn-primary:hover { background: var(--navy-2); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.btn-ghost:hover { background: var(--navy); color: var(--paper); }
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero { padding: 76px 0 60px; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 14px;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 4.6vw, 3.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+
+.hero-lede {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin: 20px 0 34px;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* --- compass illustration --- */
+.hero-visual { display: flex; justify-content: center; }
+.compass-svg { width: min(100%, 400px); height: auto; }
+
+.compass-ring { fill: none; stroke: var(--navy); }
+.compass-ring-outer { stroke-width: 1.5; opacity: 0.35; }
+.compass-ring-inner { stroke-width: 1; opacity: 0.2; }
+
+.compass-label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  fill: var(--navy);
+  opacity: 0.55;
+  text-anchor: middle;
+}
+
+.compass-needle {
+  transform-origin: 210px 210px;
+  animation: needle-sway 7s ease-in-out infinite;
+}
+.needle-gold { fill: var(--gold); }
+.needle-navy { fill: var(--navy-soft); opacity: 0.55; }
+.compass-hub { fill: var(--paper); stroke: var(--navy); stroke-width: 2.5; }
+
+@keyframes needle-sway {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(9deg); }
+}
+
+/* =========================================================
+   How it works
+   ========================================================= */
+.how { padding: 50px 0 70px; border-top: 1px solid var(--line); }
+
+.how-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.how-steps li { position: relative; padding-left: 4px; }
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.how-steps h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.how-steps p { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+
+/* =========================================================
+   Tool section
+   ========================================================= */
+.tool { padding: 20px 0 70px; }
+
+.section-title { font-size: 2rem; }
+.section-sub { color: var(--ink-soft); margin: 0 0 34px; }
+
+.skill-groups {
+  display: grid;
+  gap: 26px;
+}
+
+.skill-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.skill-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 8px 6px 4px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.skill-chip.active {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-soft);
+}
+
+.chip-toggle {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.86rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--navy);
+}
+.skill-chip.active .chip-toggle { background: var(--navy); color: var(--paper); }
+
+.chip-slider {
+  width: 90px;
+  accent-color: var(--teal);
+  display: none;
+}
+.skill-chip.active .chip-slider { display: inline-block; }
+
+.chip-level {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  width: 1.4em;
+  display: none;
+  text-align: center;
+}
+.skill-chip.active .chip-level { display: inline-block; }
+
+.target-row {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+}
+.target-row label { font-weight: 600; font-size: 0.92rem; }
+.optional { font-weight: 400; color: var(--ink-soft); font-size: 0.85rem; }
+
+#target-career {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.tool-actions {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.tool-error {
+  color: var(--rust);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* =========================================================
+   Results
+   ========================================================= */
+.results { padding: 10px 0 100px; }
+
+.results-empty {
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 46px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.results-content { display: grid; gap: 28px; }
+
+/* --- single career gap card --- */
+.gap-card {
+  background: var(--navy);
+  color: var(--paper);
+  border-radius: 16px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 40px;
+}
+
+.gauge {
+  --pct: 0;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: conic-gradient(var(--gold) calc(var(--pct) * 1%), rgba(255,255,255,0.12) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.gauge::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background: var(--navy);
+}
+.gauge-value {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--gold-soft);
+}
+.gauge-label {
+  position: absolute;
+  bottom: 34px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.6;
+}
+
+.gap-card h3 { color: var(--paper); font-size: 1.6rem; margin-bottom: 6px; }
+.gap-meta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gold-soft);
+  margin-bottom: 14px;
+}
+.gap-desc { color: rgba(246,243,236,0.75); max-width: 60ch; margin-bottom: 22px; }
+
+.skill-lists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.skill-list h5 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.skill-list.matched h5 { color: var(--teal-soft); }
+.skill-list.weak h5 { color: var(--gold-soft); }
+.skill-list.missing h5 { color: #EBB7A2; }
+
+.skill-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.skill-list li {
+  font-size: 0.86rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 7px 10px;
+}
+.skill-list .sub { opacity: 0.6; font-size: 0.78rem; }
+
+/* --- recommendation cards --- */
+.reco-grid { display: grid; gap: 18px; }
+
+.reco-card {
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+}
+
+.reco-rank {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.reco-gauge {
+  --pct: 0;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: conic-gradient(var(--teal) calc(var(--pct) * 1%), var(--paper-dim) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.reco-gauge::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+.reco-gauge span {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.reco-body h4 { margin: 0 0 4px; font-size: 1.15rem; }
+.reco-body p { margin: 0 0 6px; color: var(--ink-soft); font-size: 0.9rem; }
+.reco-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.reco-tags span {
+  background: var(--paper-dim);
+  border-radius: 999px;
+  padding: 3px 10px;
+  color: var(--navy-soft);
+}
+
+.reco-cta {
+  background: transparent;
+  border: 1.5px solid var(--navy);
+  color: var(--navy);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.reco-cta:hover { background: var(--navy); color: var(--paper); }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 26px 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; margin-bottom: 10px; }
+  .how-steps { grid-template-columns: 1fr; }
+  .gap-card { grid-template-columns: 1fr; }
+  .skill-lists { grid-template-columns: 1fr; }
+  .reco-card { grid-template-columns: 56px 1fr; }
+  .reco-cta { grid-column: 1 / -1; }
+}
